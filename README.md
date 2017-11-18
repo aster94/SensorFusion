@@ -1,5 +1,7 @@
 # MPU9250-SPI-quaternionFilters
 
+I am very bad with github so if someone wants to correct the structure of the repo i would be very glad
+
 this is a mixed library born from the almost perfect Brian's library: https://github.com/brianc118/MPU9250
 and the wonderful math magic of the quaternion filters: https://github.com/kriswiner/MPU9250
 
