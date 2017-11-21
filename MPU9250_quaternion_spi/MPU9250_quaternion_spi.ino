@@ -8,6 +8,7 @@ float pitch, roll, yaw;
 float deltat;
 
 #define SPI_CLOCK 16000000  // 16MHz
+#define SPI_BUS 2
 #define SS_PIN   PB12
 #define LED      PC13
 
@@ -21,7 +22,7 @@ float deltat;
 //#define RAW_DATA
 #define EULER_DATA
 
-MPU9250 mpu(SPI_CLOCK, SS_PIN);
+MPU9250 mpu(SPI_CLOCK, SS_PIN, SPI_BUS);
 
 void setup() {
   Serial.begin(115200);
@@ -72,14 +73,13 @@ void loop() {
   temp = mpu.temperature;
 
 #ifdef RAW_DATA
+  Serial << "From last Update:\t" << deltat << newl;
   Serial << "GYRO:\tx:" << gx << "\t\ty:" << gy << "\t\tz:" << gz << newl;
   Serial << "ACC:\tx:" << ax << "\t\ty:" << ay << "\t\tz:" << az << newl;
   Serial << "MAG:\tx:" << mx << "\t\ty:" << my << "\t\tz:" << mz << newl << newl;
 #endif
 
   deltat = deltatUpdate();
-  Serial << "From last Update:\t" << deltat << newl;
-
   MadgwickQuaternionUpdate(ax, ay, az, gx * DEG_TO_RAD, gy * DEG_TO_RAD, gz * DEG_TO_RAD, deltat);
 
   angles = getEulerAngles();
@@ -91,5 +91,4 @@ void loop() {
   Serial << "Pitch:\t" << pitch << "\t\tRoll:\t" << roll << "\t\tYaw:\t" << yaw << newl << newl;
 #endif
 
-  delay(10);
 }
