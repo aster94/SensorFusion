@@ -8,15 +8,14 @@
 
 #include "SPI.h"
 #include "MPU9250.h"
-SPIClass SPI_bus(2);	//choose which bus you are using
 
 unsigned int MPU9250::WriteReg( uint8_t WriteAddr, uint8_t WriteData )
 {
     unsigned int temp_val;
 
     select();
-    SPI_bus.transfer(WriteAddr);
-    temp_val=SPI_bus.transfer(WriteData);
+    SPI.transfer(WriteAddr);
+    temp_val=SPI.transfer(WriteData);
     deselect();
 
     //delayMicroseconds(50);
@@ -31,9 +30,9 @@ void MPU9250::ReadRegs( uint8_t ReadAddr, uint8_t *ReadBuf, unsigned int Bytes )
     unsigned int  i = 0;
 
     select();
-    SPI_bus.transfer(ReadAddr | READ_FLAG);
+    SPI.transfer(ReadAddr | READ_FLAG);
     for(i = 0; i < Bytes; i++)
-        ReadBuf[i] = SPI_bus.transfer(0x00);
+        ReadBuf[i] = SPI.transfer(0x00);
     deselect();
 
     //delayMicroseconds(50);
@@ -57,6 +56,7 @@ void MPU9250::ReadRegs( uint8_t ReadAddr, uint8_t *ReadBuf, unsigned int Bytes )
 #define MPU_InitRegNum 17
 
 bool MPU9250::init(bool calib_gyro, bool calib_acc){
+	if (my_bus != 1) SPI.setModule(my_bus); //choose SPI if differnt from 1
     pinMode(my_cs, OUTPUT);
 #ifdef CORE_TEENSY
     digitalWriteFast(my_cs, HIGH);
@@ -573,7 +573,7 @@ void MPU9250::calibrate(float *dest1, float *dest2){
 
 void MPU9250::select() {
     //Set CS low to start transmission (interrupts conversion)
-    SPI_bus.beginTransaction(SPISettings(my_clock, MSBFIRST, SPI_MODE3));
+    SPI.beginTransaction(SPISettings(my_clock, MSBFIRST, SPI_MODE3));
 #ifdef CORE_TEENSY
     digitalWriteFast(my_cs, LOW);
 #else
@@ -587,5 +587,5 @@ void MPU9250::deselect() {
 #else
     digitalWrite(my_cs, HIGH);
 #endif
-    SPI_bus.endTransaction();
+    SPI.endTransaction();
 }
