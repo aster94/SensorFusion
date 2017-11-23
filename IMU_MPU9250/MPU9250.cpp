@@ -6,8 +6,9 @@
  * Open source under the MIT License. See LICENSE.txt.
  */
 
-#include "SPI.h"
+
 #include "MPU9250.h"
+#include "SPI.h"
 
 unsigned int MPU9250::WriteReg( uint8_t WriteAddr, uint8_t WriteData )
 {
@@ -56,6 +57,7 @@ void MPU9250::ReadRegs( uint8_t ReadAddr, uint8_t *ReadBuf, unsigned int Bytes )
 #define MPU_InitRegNum 17
 
 bool MPU9250::init(bool calib_gyro, bool calib_acc){
+	SPI.begin();
 	if (my_bus != 1) SPI.setModule(my_bus); //choose SPI if differnt from 1
     pinMode(my_cs, OUTPUT);
 #ifdef CORE_TEENSY

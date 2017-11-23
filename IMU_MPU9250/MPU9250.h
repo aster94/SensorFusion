@@ -10,6 +10,7 @@
 #define MPU9250_h
 #include "Arduino.h"
 
+
 // #define AK8963FASTMODE
 
 // mpu9250 registers
@@ -128,9 +129,10 @@
 #define MPUREG_YA_OFFSET_L         0x7B
 #define MPUREG_ZA_OFFSET_H         0x7D
 #define MPUREG_ZA_OFFSET_L         0x7E
+
+
 /* ---- AK8963 Reg In MPU9250 ----------------------------------------------- */
- 
-#define AK8963_I2C_ADDR             0x0c//0x18
+#define AK8963_I2C_ADDR             0x0C//0x18 or 0c
 #define AK8963_Device_ID            0x48
  
 // Read-only Reg
