@@ -1,0 +1,22 @@
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SF	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+MadgwickUpdate	KEYWORD2
+MahonyUpdate	KEYWORD2
+deltatUpdate	KEYWORD2
+getPitch		KEYWORD2
+getYaw			KEYWORD2
+getRoll			KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
