@@ -3,8 +3,8 @@
 I am very bad with github
 
 SensorFusion cames from these two libraries: https://github.com/PaulStoffregen/MahonyAHRS and https://github.com/PaulStoffregen/MadgwickAHRS 
-I just made small modifications in the way the libraries handled the timing between two measurements
-there is an example to use it with a MPU9250
+I just made small modifications in the way the libraries handled the timing between two measurements.
+There is an example to use it with a MPU9250
 
 The IMU I am using is a MPU9250, to use it I strongly suggest you this library: https://github.com/bolderflight/MPU9250
 
