@@ -5,7 +5,7 @@ float gx, gy, gz, ax, ay, az, mx, my, mz, temp;
 float pitch, roll, yaw;
 float deltat;
 SF filter;
-#define SS_PIN 7
+#define SS_PIN PB12
 SPIClass mySPI (2);
 MPU9250 IMU(mySPI, SS_PIN);
 int status;
