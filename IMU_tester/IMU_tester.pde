@@ -1,7 +1,7 @@
 import processing.serial.*;     // import the Processing serial library
 Serial myPort;                  // The serial port
 String my_port = "COM11";      //choose your port
-float x, y, z;
+float xx, yy, zz;
 
 void setup() {
   size(1024, 800, P3D);
@@ -17,9 +17,9 @@ void draw() {
   noStroke();
   translate(width/2, height/2);
   pushMatrix();
-  rotateX(x);//pitch
-  rotateY(z);//yaw
-  rotateZ(y);//roll
+  rotateX(xx);//pitch
+  rotateY(zz);//yaw
+  rotateZ(yy);//roll
   box(100, 50, 600);
   popMatrix();
 }
@@ -31,9 +31,9 @@ void serialEvent(Serial myPort) {
   myString = trim(myString);
   float sensors[] = float(split(myString, ':'));
   
-  x = sensors[0];
-  y = sensors[1];
-  z = sensors[2];
+  xx = sensors[0];
+  yy = sensors[1];
+  zz = sensors[2];
   
   //println("roll: " + xx + " pitch: " + yy + " yaw: " + zz + "\n");
 
