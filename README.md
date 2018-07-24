@@ -1,3 +1,7 @@
-# SensorFusion
+## Installation
 
-all the information are here: https://www.hackster.io/vincenzo-g/sensor-fusion-algorithms-made-simple-6c55f6
+please use the arduino library manager to install it
+
+## SensorFusion
+
+more info here: https://www.hackster.io/vincenzo-g/sensor-fusion-algorithms-made-simple-6c55f6

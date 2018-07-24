@@ -22,18 +22,6 @@
 // Variable declaration
 
 class SF {
-private:
-	float beta;				//Madgwick: 2 * proportional gain
-	float twoKp;			//Mahony: 2 * proportional gain (Kp)
-	float twoKi;			//Mahony: 2 * integral gain (Ki)
-	float q0, q1, q2, q3;	// quaternion of sensor frame relative to auxiliary frame
-	float integralFBx, integralFBy, integralFBz;  // integral error terms scaled by Ki
-	bool anglesComputed;
-	static float invSqrt(float x);
-	void computeAngles();
-	float roll, pitch, yaw;
-	float Now,lastUpdate,deltat;
-
 //-------------------------------------------------------------------------------------------
 // Function declarations
 
@@ -82,6 +70,19 @@ public:
 		if (!anglesComputed) computeAngles();
 		return yaw;
 	}
+
+private:
+	float beta;				//Madgwick: 2 * proportional gain
+	float twoKp;			//Mahony: 2 * proportional gain (Kp)
+	float twoKi;			//Mahony: 2 * integral gain (Ki)
+	float q0, q1, q2, q3;	// quaternion of sensor frame relative to auxiliary frame
+	float integralFBx, integralFBy, integralFBz;  // integral error terms scaled by Ki
+	bool anglesComputed;
+	static float invSqrt(float x);
+	void computeAngles();
+	float roll, pitch, yaw;
+	float Now,lastUpdate,deltat;
+	
 };
 
 #endif

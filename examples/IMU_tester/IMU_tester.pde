@@ -1,3 +1,7 @@
+/*
+This code is made for processing https://processing.org/
+*/
+
 import processing.serial.*;     // import the Processing serial library
 Serial myPort;                  // The serial port
 String my_port = "COM11";      //choose your port
@@ -35,6 +39,6 @@ void serialEvent(Serial myPort) {
   yy = sensors[1];
   zz = sensors[2];
   
-  //println("roll: " + xx + " pitch: " + yy + " yaw: " + zz + "\n");
+  //println("roll: " + xx + " pitch: " + yy + " yaw: " + zz + "\n"); //debug
 
 }
