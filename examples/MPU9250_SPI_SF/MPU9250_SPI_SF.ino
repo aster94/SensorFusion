@@ -1,3 +1,5 @@
+//the Serial needs this library https://github.com/geneReeves/ArduinoStreaming
+
 #include "MPU9250.h"
 #include "SensorFusion.h"
 #include "Streaming.h"
