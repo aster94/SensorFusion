@@ -21,6 +21,7 @@ please note that the Roll is inverted
 
 
 I am using an STM32F103F103 known as blue pill but also any Arduino board will work
+
 The IMU is a cheap mpu9250, you could find it everywhere for about 2€ (eBay, Aliexpress, ecc), to use it I strongly suggest you [this library](https://github.com/bolderflight/MPU9250)
 
 
