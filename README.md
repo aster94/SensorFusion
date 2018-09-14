@@ -4,8 +4,9 @@ Using IMUs is one of the most struggling part of every Arduino lovers, here ther
 ![heading](https://image.ibb.co/cNL6n9/2.png)
 
 This library will work with every IMU, it just need the raw data of gyroscope and accelerometer (the magnetometer isn't mandatory), it is based on these two libraries:
-https://github.com/PaulStoffregen/MahonyAHRS 
-https://github.com/PaulStoffregen/MadgwickAHRS 
+- https://github.com/PaulStoffregen/MahonyAHRS 
+- https://github.com/PaulStoffregen/MadgwickAHRS 
+
 I just made small modifications in the way the libraries handled the timing between two measurements and melted them together
 
 ## Installation
