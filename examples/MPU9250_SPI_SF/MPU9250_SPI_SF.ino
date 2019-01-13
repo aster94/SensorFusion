@@ -1,20 +1,20 @@
-//the Serial needs this library https://github.com/geneReeves/ArduinoStreaming
-
-#include "MPU9250.h"
+#include "MPU9250.h"		// https://github.com/bolderflight/MPU9250 	
+#include "Streaming.h" 		// needed for the Serial output https://github.com/geneReeves/ArduinoStreaming
 #include "SensorFusion.h"
-#include "Streaming.h"
+SF fusion;
+
 float gx, gy, gz, ax, ay, az, mx, my, mz, temp;
 float pitch, roll, yaw;
 float deltat;
-SF filter;
+
 #define SS_PIN PB12
 SPIClass mySPI (2);
 MPU9250 IMU(mySPI, SS_PIN);
 int status;
 
-//#define EULER_DATA
+#define EULER_DATA
 //#define RAW_DATA
-#define PROCESSING
+//#define PROCESSING
 
 
 void setup() {
@@ -56,22 +56,22 @@ void loop() {
   Serial << "TEMP:\t" << temp << newl << newl;
 #endif
 
-  deltat = filter.deltatUpdate();
-  //filter.MahonyUpdate(gx, gy, gz, ax, ay, az, mx, my, mz, deltat);  //mahony is suggested if there isn't the mag
-  filter.MadgwickUpdate(gx, gy, gz, ax, ay, az, mx, my, mz, deltat);  //else use the magwick
+  deltat = fusion.deltatUpdate();
+  //fusion.MahonyUpdate(gx, gy, gz, ax, ay, az, mx, my, mz, deltat);  //mahony is suggested if there isn't the mag
+  fusion.MadgwickUpdate(gx, gy, gz, ax, ay, az, mx, my, mz, deltat);  //else use the magwick
 
-  roll = filter.getRoll();
-  pitch = filter.getPitch();
-  yaw = filter.getYaw();
+  roll = fusion.getRoll();
+  pitch = fusion.getPitch();
+  yaw = fusion.getYaw();
 
 #ifdef EULER_DATA
   Serial << "Pitch:\t" << pitch << "\t\tRoll:\t" << roll << "\t\tYaw:\t" << yaw << newl << newl;
 #endif
 
 #ifdef PROCESSING
-  roll = filter.getRollRadians();
-  pitch = filter.getPitchRadians();
-  yaw = filter.getYawRadians();
+  roll = fusion.getRollRadians();
+  pitch = fusion.getPitchRadians();
+  yaw = fusion.getYawRadians();
   Serial  << pitch << ":" << roll << ":" << yaw << newl;
 #endif
 
