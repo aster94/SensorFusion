@@ -15,6 +15,7 @@ int status;
 #define EULER_DATA
 //#define RAW_DATA
 //#define PROCESSING
+//#define SERIAL_PLOTER
 
 
 void setup() {
@@ -73,6 +74,10 @@ void loop() {
   pitch = fusion.getPitchRadians();
   yaw = fusion.getYawRadians();
   Serial  << pitch << ":" << roll << ":" << yaw << newl;
+#endif
+
+#ifdef SERIAL_PLOTER
+  Serial << pitch << " " << roll << " " << yaw << endl;
 #endif
 
   //delay(200); //for readability
