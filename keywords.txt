@@ -10,8 +10,8 @@ MadgwickUpdate	KEYWORD2
 MahonyUpdate	KEYWORD2
 deltatUpdate	KEYWORD2
 getPitch	KEYWORD2
-getYaw		KEYWORD2
-getRoll		KEYWORD2
+getYaw	KEYWORD2
+getRoll	KEYWORD2
 getRollRadians	KEYWORD2
 getPitchRadians	KEYWORD2
 getYawRadians	KEYWORD2
