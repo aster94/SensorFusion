@@ -15,6 +15,7 @@ getRoll	KEYWORD2
 getRollRadians	KEYWORD2
 getPitchRadians	KEYWORD2
 getYawRadians	KEYWORD2
+getQuat	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
