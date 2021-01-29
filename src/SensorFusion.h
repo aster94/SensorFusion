@@ -70,6 +70,10 @@ public:
 		if (!anglesComputed) computeAngles();
 		return yaw;
 	}
+	float* getQuat() {
+		memcpy(_copyQuat, &q0, sizeof(float)*4);
+		return _copyQuat;
+	}
 
 private:
 	float beta;				//Madgwick: 2 * proportional gain
@@ -82,6 +86,7 @@ private:
 	void computeAngles();
 	float roll, pitch, yaw;
 	float Now,lastUpdate,deltat;
+	float _copyQuat[4];	// copy buffer to protect the quaternion values since getters!=setters
 	
 };
 
