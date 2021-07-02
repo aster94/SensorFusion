@@ -431,6 +431,95 @@ void SF::MadgwickUpdate(float gx, float gy, float gz, float ax, float ay, float 
 	anglesComputed = 0;
 }
 
+
+bool SF::initQuat(float ax, float ay, float az, float mx, float my, float mz){
+    // Compute feedback only if accelerometer measurement valid
+	// (avoids NaN in accelerometer normalisation)
+	if(!((ax == 0.0f) && (ay == 0.0f) && (az == 0.0f))) {
+		float recipNorm;
+		float N[3], D[3], E[3]; //Global vectors North, Down, East relative to sensor
+		
+		// Down is negative accelerometer measurement
+		recipNorm = invSqrt(ax * ax + ay * ay + az * az);
+		D[0] = - ax * recipNorm;
+		D[1] = - ay * recipNorm;
+		D[2] = - az * recipNorm;
+		
+		// Magnetometer is not exatly perpendicular to Down, therefor not exatly North
+		// we will calculate North later
+		float m[3];
+		recipNorm = invSqrt(mx * mx + my * my + mz * mz);
+		m[0] = mx * recipNorm;
+		m[1] = mx * recipNorm;
+		m[2] = mx * recipNorm;
+        
+		// Calculate East
+		vectorCross(m, D, E);
+		recipNorm = invSqrt(E[0] * E[0] + E[1] * E[1] + E[2] * E[2]);
+		E[0] *= recipNorm;
+		E[1] *= recipNorm;
+		E[2] *= recipNorm;
+		
+		// Calculate North
+		vectorCross(D, E, N);
+		
+		// Calculate Euler Parameter (quaternion) from the rotation matrix A=(N|D|E).
+		// Using Shepperd algorithm (Woernle 2011)
+		float Trace = N[0] + D[1] + E[2];
+		float a[4] = {Trace, N[0], D[1], E[2]};
+		float e[4];
+		
+		//find index of Largest Euler parameter
+		int k=0;
+		for (int i=1; i<4; i++){
+			if (a[i] > a[k])
+				k = i;
+		}
+		//calculate that parameter
+		e[k] = sqrt(1 + 2 * a[k] - Trace)/2;
+		
+		switch (k){
+			case 0:
+				e[1] = (D[2] - E[1]) / (4 * e[0]);
+				e[2] = (E[0] - N[2]) / (4 * e[0]);
+				e[3] = (N[1] - D[0]) / (4 * e[0]);
+				break;
+			case 1:
+				e[0] = (D[2] - E[1]) / (4 * e[1]);
+				e[2] = (D[0] + N[1]) / (4 * e[1]);
+				e[3] = (E[0] + N[2]) / (4 * e[1]);
+				break;
+			case 2:
+				e[0] = (E[0] - N[2]) / (4 * e[2]);
+				e[1] = (D[0] + N[1]) / (4 * e[2]);
+				e[3] = (E[1] + D[2]) / (4 * e[2]);
+				break;
+			case 3:
+				e[0] = (N[1] - D[0]) / (4 * e[3]);
+				e[1] = (E[0] + N[2]) / (4 * e[3]);
+				e[2] = (E[1] + D[2]) / (4 * e[3]);
+		}
+		
+		// invert the quaternion rotation
+		// we calculated the rotation of Global NDE relative to the sensor 
+		// but we need the rotation of the Sensor relative to NDE
+		q0 = e[0];
+		q1 = -e[1];
+		q2 = -e[2];
+		q3 = -e[3];
+		
+		return true;
+	} else return false;
+}
+
+void SF::vectorCross(float A[3], float B[3], float cross[3])
+{
+	cross[0] = A[1] * B[2] - A[2] * B[1];
+	cross[1] = A[2] * B[0] - A[0] * B[2];
+	cross[2] = A[0] * B[1] - A[1] * B[0];
+}
+
+
 //============================================================================================
 // END OF CODE
 //============================================================================================
