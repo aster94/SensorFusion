@@ -478,9 +478,6 @@ bool SF::initQuat(float ax, float ay, float az, float mx, float my, float mz){
 		//calculate that parameter
 		e[k] = sqrt(1 + 2 * a[k] - Trace)/2;
 		
-		Serial.print("k: ");
-		Serial.println(k);
-		
 		switch (k){
 			case 0:
 				e[1] = (D[2] - E[1]) / (4 * e[0]);
