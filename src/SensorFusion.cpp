@@ -57,12 +57,13 @@ SF::SF()
 float SF::invSqrt(float x)
 {
 	float halfx = 0.5f * x;
-	float y = x;
-	long i = *(long*)&y;
-	i = 0x5f3759df - (i>>1);
-	y = *(float*)&i;
-	y = y * (1.5f - (halfx * y * y));
-	y = y * (1.5f - (halfx * y * y));
+	union {
+	  float    f;
+	  uint32_t i;
+	} conv = { .f = x };
+	conv.i = 0x5f3759df - (conv.i >> 1);
+	conv.f *= 1.5f - (halfx * conv.f * conv.f);
+	conv.f *= 1.5f - (halfx * conv.f * conv.f);
 	return y;
 }
 
