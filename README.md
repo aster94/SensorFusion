@@ -10,11 +10,11 @@ This library will work with every IMU, it just need the raw data of gyroscope an
 I just made small modifications in the way the libraries handled the timing between two measurements and melted them together
 
 
-# Installation
+## Installation
 Use the arduino/platformIO library manager or download directly from github
 
 
-# About
+## About
 
 Click on the video to see it on youtube
 
@@ -29,3 +29,7 @@ The IMU is a cheap MPU9250, you could find it everywhere for about 2€ (eBay, A
 
 If you wish use `IMU_tester` in the extras folder to see how you IMU works (needs Processing)
 Note: I am using also this very useful library: [Streaming](https://github.com/geneReeves/ArduinoStreaming)
+
+## Donate
+
+If you liked the library and wish to donate you can sent to [PayPal](https://paypal.me/aster94)
