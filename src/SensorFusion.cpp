@@ -64,7 +64,7 @@ float SF::invSqrt(float x)
 	conv.i = 0x5f3759df - (conv.i >> 1);
 	conv.f *= 1.5f - (halfx * conv.f * conv.f);
 	conv.f *= 1.5f - (halfx * conv.f * conv.f);
-	return y;
+	return conv.f;
 }
 
 //-------------------------------------------------------------------------------------------
