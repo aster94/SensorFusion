@@ -29,7 +29,3 @@ The IMU is a cheap MPU9250, you could find it everywhere for about 2€ (eBay, A
 
 If you wish use `IMU_tester` in the extras folder to see how you IMU works (needs Processing)
 Note: I am using also this very useful library: [Streaming](https://github.com/geneReeves/ArduinoStreaming)
-
-## Donate
-
-If you liked the library and wish to donate you can sent to [PayPal](https://paypal.me/aster94)
